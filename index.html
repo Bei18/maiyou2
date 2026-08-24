@@ -10,12 +10,12 @@
 
   <link
     rel="icon"
-    href="https://bei18.github.io/mai-you/app-icon-512.png"
+    href="./app-icon-512.png"
     type="image/png"
   >
   <link
     rel="apple-touch-icon"
-    href="https://bei18.github.io/mai-you/app-icon-512.png"
+    href="./app-icon-512.png"
   >
 
   <style>
@@ -167,10 +167,6 @@
       color: #cbd5e1;
     }
 
-    /* ================================
-       微信提示层（适配移动端全屏）
-       ================================ */
-
     .wechat-overlay {
       display: none;
       position: fixed;
@@ -294,15 +290,11 @@
 
 <body>
 
-  <!-- ================================
-       正常下载页面
-       ================================ -->
-
   <main class="card">
     <div class="app-icon-wrapper">
       <img
         id="appIcon"
-        src="https://bei18.github.io/mai-you/app-icon-512.png"
+        src="./app-icon-512.png"
         alt="麦友"
         class="app-icon"
       >
@@ -319,7 +311,7 @@
     <a
       id="downloadBtn"
       class="btn-download"
-      href="https://bei18.github.io/mai-you/maiyou.v1.1.5.apk"
+      href="./maiyou.v1.1.5.apk"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
@@ -333,10 +325,6 @@
       <p class="version" id="appVersion">v1.1.5</p>
     </div>
   </main>
-
-  <!-- ================================
-       微信内提示页面
-       ================================ -->
 
   <div class="wechat-overlay" id="wechatOverlay">
     <div class="wechat-content">
@@ -382,28 +370,19 @@
   </div>
 
   <script>
-    /* ================================
-       页面配置
-       ================================ */
     const APP_CONFIG = {
       appName: "麦友",
       appDesc: "免费使用的聊天软件",
-      appIcon: "https://bei18.github.io/mai-you/app-icon-512.png",
-      downloadUrl: "https://bei18.github.io/mai-you/maiyou.v1.1.5.apk",
+      appIcon: "./app-icon-512.png",
+      downloadUrl: "./maiyou.v1.1.5.apk",
       version: "v1.1.5",
       pageTitle: "麦友 - 下载"
     };
 
-    /* ================================
-       判断当前是否为微信环境
-       ================================ */
     function isWeChat() {
       return /micromessenger/i.test(navigator.userAgent);
     }
 
-    /* ================================
-       初始化页面
-       ================================ */
     function initPage() {
       document.title = APP_CONFIG.pageTitle;
 
@@ -422,7 +401,6 @@
       const appVersion = document.getElementById("appVersion");
       if (appVersion) appVersion.textContent = APP_CONFIG.version;
 
-      /* 微信环境显示提示层 */
       if (isWeChat()) {
         const overlay = document.getElementById("wechatOverlay");
         if (overlay) {
@@ -431,9 +409,6 @@
       }
     }
 
-    /* ================================
-       启动
-       ================================ */
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initPage);
     } else {
