@@ -135,6 +135,7 @@
       text-decoration: none;
       box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
       transition: transform 0.15s ease, opacity 0.15s ease;
+      cursor: pointer;
     }
 
     .btn-download:active {
@@ -311,7 +312,7 @@
     <a
       id="downloadBtn"
       class="btn-download"
-      href="./maiyou.v1.1.5.apk"
+      href="javascript:void(0);"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
@@ -326,6 +327,7 @@
     </div>
   </main>
 
+  <!-- 微信内打开遮罩 -->
   <div class="wechat-overlay" id="wechatOverlay">
     <div class="wechat-content">
       <div class="wechat-top">
@@ -396,16 +398,25 @@
       if (appDesc) appDesc.textContent = APP_CONFIG.appDesc;
 
       const downloadBtn = document.getElementById("downloadBtn");
-      if (downloadBtn) downloadBtn.href = APP_CONFIG.downloadUrl;
+
+      if (downloadBtn) {
+        downloadBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          
+          if (isWeChat()) {
+            const overlay = document.getElementById("wechatOverlay");
+            if (overlay) overlay.style.display = "block";
+          } else {
+          }
+        });
+      }
 
       const appVersion = document.getElementById("appVersion");
       if (appVersion) appVersion.textContent = APP_CONFIG.version;
 
       if (isWeChat()) {
         const overlay = document.getElementById("wechatOverlay");
-        if (overlay) {
-          overlay.style.display = "block";
-        }
+        if (overlay) overlay.style.display = "block";
       }
     }
 
